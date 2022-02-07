@@ -1,7 +1,8 @@
 import numpy as np
 import regex as re
 
-cipher_text = re.sub(r'[^a-z]', '', input('Enter ciphertext to crack: ').lower())
+cipher_text = open(input('Enter filename of ciphertext to crack (plain text): '), 'r').read()
+cipher_text = re.sub(r'[^a-z]', '', cipher_text.lower())
 freq_eng = {'a': 8.12, 'b': 1.49, 'c': 2.71, 'd': 4.32, 'e': 12.0, 'f': 2.3, 'g': 2.03, 'h': 5.92, 'i': 7.31, 'j': 0.1, 'k': 0.69, 'l': 3.98, 'm': 2.61, 'n': 6.95, 'o': 7.68, 'p': 1.82, 'q': 0.11, 'r': 6.02, 's': 6.28, 't': 9.1, 'u': 2.88, 'v': 1.11, 'w': 2.09, 'x': 0.17, 'y': 2.11, 'z': 0.07}
 cipher = {'key': ''}
 
@@ -51,4 +52,4 @@ print(f'\nKey is: {cipher["key"]}')
 # Decode cipher_text
 plain_text = ''.join([shift_let(cipher_text[i], 26 - ord(cipher['key'][i % cipher['key_len']]) + 97) for i in range(len(cipher_text))])
 
-print(f'\n{plain_text}')
+open('output.txt', 'w').write(f'{plain_text}')
